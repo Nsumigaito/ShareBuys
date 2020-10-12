@@ -23,13 +23,13 @@ Rails.application.routes.draw do
 
   	# users
   	resources :users, only: [:show]
-	# 残高画面へのルート
-	get '/users/balance' => 'users#balance', as: 'balance'
-	# フォロー・フォロワー一覧へのルート
-	get '/users/following' => 'users#following', as: 'following_user'
-	get '/users/followers' => 'users#followers', as: 'followers_user'
-	# 退会処理
-	get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe_users'
+  	# 残高画面へのルート
+  	get '/users/balance' => 'users#balance', as: 'balance'
+  	# フォロー・フォロワー一覧へのルート
+  	get '/users/following' => 'users#following', as: 'following_user'
+  	get '/users/followers' => 'users#followers', as: 'followers_user'
+  	# 退会処理
+  	get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe_users'
     patch '/users/withdraw' => 'users#withdraw', as: 'withdraw_users'
 
     # relationships
@@ -43,13 +43,11 @@ Rails.application.routes.draw do
 
     # posts
     resources :posts, only: [:new, :create, :index, :show, :destroy] do
-
     	# 投稿へのコメント
     	resources :post_comments, only: [:create, :destroy]
 
     	# 投稿へのいいね
     	resource :favorites, only: [:create, :destroy]
-
     end
     # 投稿を報告する
     patch '/posts/:id' => 'posts#report', as: 'report'
@@ -61,7 +59,5 @@ Rails.application.routes.draw do
 
     # notifications
     resources :notifications, only: [:index]
-
   end
-
 end
