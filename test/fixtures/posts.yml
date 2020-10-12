@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  title: MyString
+  body: MyText
+  post_image: MyString
+  value: 1
+  is_report: false
+
+two:
+  user: two
+  title: MyString
+  body: MyText
+  post_image: MyString
+  value: 1
+  is_report: false
