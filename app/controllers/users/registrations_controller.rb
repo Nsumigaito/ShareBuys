@@ -38,7 +38,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def profile_edit
+
+  end
+
+  def profile_update
+    current_user.assign_attributes(account_update_params)
+    if current_user.save
+    redirect_to my_page_path, notice: 'プロフィールを更新しました'
+    else
+      render "profile_edit"
+    end
+  end
+
   # protected
+
+  def configure_account_update_params
+   devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction, :profile_image])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
