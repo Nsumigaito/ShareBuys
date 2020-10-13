@@ -13,7 +13,7 @@
 
   <body>
     <header style = "height:100px;background-color:black;">
-      
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
     </header><!-- /header -->
     <%= yield %>
     <footer class = "fixed-bottom" style = "height:100px;background-color:black;">
