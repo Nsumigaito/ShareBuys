@@ -34,8 +34,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
 
       # 追加カラム
       t.string :name, null: false
-      t.text :introduction, null: false
-      t.integer :point, null: false
+      t.text :introduction
+      t.string :image
+      t.integer :point
       t.string :telephone, null: false, unique: true
 
       # ユーザーステータス　TRUE=有効　FALSE=退会済み

@@ -70,6 +70,7 @@ gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 
 #画像投稿、サイズ変更
+gem 'carrierwave'
 gem 'refile', require: "refile/rails", github: 'manfe/refile'
 gem 'refile-mini_magick'
 
