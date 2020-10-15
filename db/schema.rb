@@ -64,9 +64,8 @@ ActiveRecord::Schema.define(version: 2020_10_12_021056) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "title", null: false
     t.text "body", null: false
-    t.string "post_image", null: false
+    t.string "post_image"
     t.integer "value", null: false
     t.boolean "is_report", default: false, null: false
     t.datetime "created_at", null: false

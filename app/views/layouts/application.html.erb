@@ -31,8 +31,9 @@
             <%= link_to "新規登録", new_user_registration_path %>
             <%= link_to "ログイン", new_user_session_path %>
           <% end %>
-        </div><!-- /.dropdown-menu -->
-      </div><!-- /.dropdown -->
+        </div>
+      </div>
+      <%= link_to 'logo', posts_path %>
     </header><!-- /header -->
     <%= yield %>
     <footer class = "fixed-bottom" style = "height:100px;background-color:black;">

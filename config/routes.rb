@@ -56,13 +56,13 @@ Rails.application.routes.draw do
     end
 
     # 投稿を報告する
-    patch '/posts/:id' => 'posts#report', as: 'report'
+    patch '/post/:id' => 'posts#report', as: 'report'
 
     # orders
     resources :orders, only: [:new, :create, :index]
 
     # 注文確認画面
-    get '/posts/confilm' => 'posts#confilm', as: 'confilm'
+    get '/post/confilm' => 'posts#confilm', as: 'confilm'
 
     # notifications
     resources :notifications, only: [:index]
