@@ -31,7 +31,7 @@ class Users::SessionsController < Devise::SessionsController
 
         new_user_session_path
       else
-        user_path(resource)
+        users_path(resource)
       end
     end
 
