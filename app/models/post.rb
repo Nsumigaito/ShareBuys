@@ -5,4 +5,6 @@ class Post < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   belongs_to :user
+
+  attachment :profile_image
 end
