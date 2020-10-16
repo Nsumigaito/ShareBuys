@@ -1,4 +1,5 @@
 <% @posts.each do |post| %>
+<%= link_to(post_path(post.id), class: 'list-content') do %>
 <% if post.user.image? %>
   <%= image_tag post.user.image.url, :size => '100x100' %>
 <% else %>
@@ -10,19 +11,22 @@
 <%= post.user.name %>
 <%= post.value %>
 <%= post.body %>
+<% end %>
 <div class="dropdown">
   <!-- 切替ボタンの設定 -->
   <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
   <!-- ドロップメニューの設定 -->
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  	<% if current_user.id == post.user.id %>
-  		<%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
-  		<%= link_to "報告", report_path(post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
-  	<% else %>
-  		<%= link_to "報告", report_path(post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
-  	<% end %>
+    <% if current_user.id == post.user.id %>
+      <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
+      <%= link_to "報告", report_path(post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+    <% else %>
+      <%= link_to "報告", report_path(post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+    <% end %>
   </div>
 </div>
 <% end %>
 
+
 <%= link_to "✉️", new_post_path %>
+
