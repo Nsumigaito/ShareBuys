@@ -3,9 +3,6 @@
 <% else %>
   <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
 <% end %>
-<% unless @post.post_image.present? %>
-  <%= attachment_image_tag @post, :post_image, :size => '100x100' %>
-<% end %>
 <%= @post.user.name %>
 <%= @post.value %>
 <%= @post.body %>

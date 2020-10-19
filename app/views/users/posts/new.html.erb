@@ -11,13 +11,6 @@
     	<%= f.text_area :body, autofocus: true, autocomplete: "body" %>
   	</div>
 
-  	<div class="field">
-  	<%= attachment_image_tag @post, :post_image, size: "300x300", format: 'jpeg', fallback: "no_image.jpg", size: "300x300" %>
-  	<button type="button" class="btn btn-outline-secondary rounded-pill">
-    	<%= f.file_field :post_image, accept: 'image/jpeg,image/gif,image/png' %>
-  	</button>
-  	</div>
-
   	<div class="actions">
     	<%= f.submit "投稿" %>
   	</div>
