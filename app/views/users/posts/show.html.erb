@@ -6,12 +6,13 @@
 <%= @post.user.name %>
 <%= @post.value %>
 <%= @post.body %>
+コメント数：<%= @post.post_comments.count %>
 <div class="dropdown">
   <!-- 切替ボタンの設定 -->
   <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
   <!-- ドロップメニューの設定 -->
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <% if current_user.id == @post.user.id %>
+    <% if current_user == @post.user %>
       <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
       <%= link_to "報告", report_path(@post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
     <% else %>
@@ -19,3 +20,25 @@
     <% end %>
   </div>
 </div>
+<%= form_with model: [@post, @post_comment] do |f| %>
+<%= f.text_area :comment, rows:'5' %>
+<%= f.submit "送信する" %>
+<% end %>
+<% @post.post_comments.each do |post_comment| %>
+<%= link_to users_path(@post.user) do %>
+  <% if @post.user.image? %>
+    <%= image_tag @post.user.image.url, :size => '100x100' %>
+  <% else %>
+    <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+  <% end %>
+  <%= post_comment.user.name %>
+<% end %>
+
+<%= post_comment.comment %>
+
+<% if current_user == post_comment.user %>
+  <%= link_to "Destroy", post_post_comment_path(post_comment.post, post_comment),
+    method: :delete, "data-confirm" => "本当に消しますか？",
+    :class => "destroy_btn" %>
+<% end %>
+<% end %>
