@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   	root 'homes#top'
 
   	# posts
-  	resources :posts, only: [:index, :destroy]
+  	resources :posts, only: [:index, :show]
+
+    # 報告された投稿の報告取消
+    patch '/admins/post/:id' => 'posts#cancel_report', as: 'cancel_report'
   end
 
   scope module: :users do
@@ -19,7 +22,7 @@ Rails.application.routes.draw do
   	devise_for :users
 
   	# users
-  	resource :users, only: [:show]
+    get 'users/:id' => 'users#show', as: 'user'
 
     # プロフィール編集用 [name],[introduction],[profile_image] registrationsのeditとは別
     get 'profile_edit' => 'users#profile_edit', as: 'profile_edit'
@@ -29,8 +32,8 @@ Rails.application.routes.draw do
   	get '/users/balance' => 'users#balance', as: 'balance'
 
   	# フォロー・フォロワー一覧へのルート
-  	get '/users/following' => 'users#following', as: 'following_user'
-  	get '/users/followers' => 'users#followers', as: 'followers_user'
+  	get '/users/:id/following' => 'users#following', as: 'following_user'
+  	get '/users/:id/followers' => 'users#followers', as: 'followers_user'
 
   	# 退会処理
   	get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe_users'
