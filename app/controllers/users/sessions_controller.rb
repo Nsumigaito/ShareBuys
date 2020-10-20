@@ -26,7 +26,9 @@ class Users::SessionsController < Devise::SessionsController
   # end
   private
     def after_sign_in_path_for(resource)
-      if resource.is_deleted == true
+      if resource.is_admin == true
+        admins_root_path
+      elsif resource.is_deleted == true
         sign_out resource
 
         new_user_session_path
