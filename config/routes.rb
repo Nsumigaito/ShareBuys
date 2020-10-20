@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   	root 'homes#top'
 
   	# posts
-  	resources :posts, only: [:index, :show, :destroy]
+  	resources :posts, only: [:index, :show]
+
+    # 報告された投稿の報告取消
+    patch '/admins/post/:id' => 'posts#cancel_report', as: 'cancel_report'
   end
 
   scope module: :users do
