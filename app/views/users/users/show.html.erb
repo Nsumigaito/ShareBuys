@@ -11,6 +11,23 @@
 <%= link_to @user.relationships.count, following_user_path(@user.id) %>
 <h3>フォロワー</h3>
 <%= link_to @user.reverse_of_relationships.count, followers_user_path(@user.id) %>
+<% unless current_user == @user %>
+  <% if current_user.following?(@user) %>
+    <%= form_for(current_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f| %>
+
+      <%= hidden_field_tag :follow_id, @user.id %>
+      <%= f.submit 'フォロー外す' %>
+
+    <% end %>
+  <% else %>
+    <%= form_for(current_user.relationships.build) do |f| %>
+
+      <%= hidden_field_tag :follow_id, @user.id %>
+      <%= f.submit 'フォローする' %>
+
+    <% end %>
+  <% end %>
+<% end %>
 <h3>ポイント</h3>
 <% if current_user == @user %>
 	<%= link_to balance_path(@user.id) do %>

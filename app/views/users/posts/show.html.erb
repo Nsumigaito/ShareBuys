@@ -36,7 +36,7 @@
 <%= f.submit "送信する" %>
 <% end %>
 <% @post.post_comments.each do |post_comment| %>
-<%= link_to users_path(post_comment.user) do %>
+<%= link_to user_path(post_comment.user.id) do %>
   <% if @post.user.image? %>
     <%= image_tag @post.user.image.url, :size => '100x100' %>
   <% else %>
