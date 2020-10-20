@@ -1,3 +1,12 @@
+<% @users.each do |user| %>
+	<% if user.image? %>
+	  <%= image_tag user.image.url, :size => '100x100' %>
+	<% else %>
+	  <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+	<% end %>
+	<%= user.name %>
+<% end %>
+
 <% @posts.each do |post| %>
   <%= link_to(post_path(post.id)) do %>
     <% if post.user.image? %>
@@ -35,14 +44,3 @@
     </div>
   </div>
 <% end %>
-
-
-<%= link_to "✉️", new_post_path %>
-
-<%= form_tag(searches_path, method: :get) do %>
-
-  <%= text_field_tag(:word) %>
-  <%= submit_tag '検索' %>
-
-<% end %>
-

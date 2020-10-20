@@ -10,4 +10,7 @@ class Post < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
+  def self.search(word)
+  	@posts = Post.where("body LIKE?", "%#{word}%")
+  end
 end
