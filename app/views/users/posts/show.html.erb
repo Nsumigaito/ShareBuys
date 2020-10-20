@@ -7,6 +7,17 @@
 <%= @post.value %>
 <%= @post.body %>
 コメント数：<%= @post.post_comments.count %>
+<% if @post.favorited_by?(current_user) %>
+  <%= link_to post_favorites_path(@post), method: :delete, remote: true do %>
+    <span aria-hidden="true"></span>
+    <%= @post.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to post_favorites_path(@post), method: :post, remote: true do %>
+    <span aria-hidden="true"></span>
+    <%= @post.favorites.count %>
+  <% end %>
+<% end %>
 <div class="dropdown">
   <!-- 切替ボタンの設定 -->
   <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -25,7 +36,7 @@
 <%= f.submit "送信する" %>
 <% end %>
 <% @post.post_comments.each do |post_comment| %>
-<%= link_to users_path(@post.user) do %>
+<%= link_to users_path(post_comment.user) do %>
   <% if @post.user.image? %>
     <%= image_tag @post.user.image.url, :size => '100x100' %>
   <% else %>
