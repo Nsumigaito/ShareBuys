@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   	root 'homes#top'
 
   	# posts
-  	resources :posts, only: [:index, :destroy]
+  	resources :posts, only: [:index, :show, :destroy]
   end
 
   scope module: :users do
