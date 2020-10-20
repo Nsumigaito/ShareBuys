@@ -5,12 +5,10 @@
 <% else %>
   <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
 <% end %>
-<% unless post.post_image.present? %>
-  <%= attachment_image_tag post, :post_image, :size => '100x100' %>
-<% end %>
 <%= post.user.name %>
 <%= post.value %>
 <%= post.body %>
+コメント数：<%= post.post_comments.count %>
 <% end %>
 <div class="dropdown">
   <!-- 切替ボタンの設定 -->
