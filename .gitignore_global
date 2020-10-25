@@ -1,3 +1,0 @@
-[core]
-    excludesfile = /Users/your_user_name/.gitignore_global
-    .DS_Store
