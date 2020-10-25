@@ -7,21 +7,56 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 users = User.create!(	name:  "管理者",
 						introduction: "アイウエオ",
+                        image: open("./db/fixtures/142_refileDownloadImage.png"),
 						point: 100,
 						telephone: "00011112222",
-             			email: "admin6@example.jp",
-         				password:  "11111111",
-             			password_confirmation: "11111111",
+             			email: "admin100@example.jp",
+         				password:  "Nagi7230",
+             			password_confirmation: "Nagi7230",
              			is_deleted: false,
              			is_admin: true
              		)
 users = User.create!(	name:  "ユーザー",
 						introduction: "あいうえお",
-						point: 100,
+                        image: open("./db/fixtures/142_refileDownloadImage.png"),
+						point: 1000,
 						telephone: "11122223333",
-             			email: "user6@example.jp",
-         				password:  "22222222",
-             			password_confirmation: "22222222",
+             			email: "user10@example.jp",
+         				password:  "Nagi7230",
+             			password_confirmation: "Nagi7230",
              			is_deleted: false,
              			is_admin: false
              		)
+users = User.create!(   name:  "ユーザー2",
+                        introduction: "かきくけこ",
+                        image: open("./db/fixtures/142_refileDownloadImage.png"),
+                        point: 1000,
+                        telephone: "22233334444",
+                        email: "user20@example.jp",
+                        password:  "Nagi7230",
+                        password_confirmation: "Nagi7230",
+                        is_deleted: false,
+                        is_admin: false
+                    )
+users = User.create!(   name:  "ユーザー3",
+                        introduction: "さしすせそ",
+                        image: open("./db/fixtures/142_refileDownloadImage.png"),
+                        point: 1000,
+                        telephone: "33344445555",
+                        email: "user30@example.jp",
+                        password:  "Nagi7230",
+                        password_confirmation: "Nagi7230",
+                        is_deleted: false,
+                        is_admin: false
+                    )
+users = User.create!(   name:  "ユーザー4",
+                        introduction: "たちつてと",
+                        image: open("./db/fixtures/142_refileDownloadImage.png"),
+                        point: 1000,
+                        telephone: "44455556666",
+                        email: "user40@example.jp",
+                        password:  "Nagi7230",
+                        password_confirmation: "Nagi7230",
+                        is_deleted: false,
+                        is_admin: false
+                    )
