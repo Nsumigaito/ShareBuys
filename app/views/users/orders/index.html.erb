@@ -1,0 +1,12 @@
+<% @orders.each do |order| %>
+<% if order.image? %>
+  <%= image_tag order.image, :size => '100x100' %>
+<% else %>
+  <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+<% end %>
+<%= order.name %>
+<%= order.value %>
+<%= order.title %>
+コメント数：<%= order.comment_count %>
+<%= order.favorite_count %>
+<% end %>

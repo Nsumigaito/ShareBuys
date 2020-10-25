@@ -1,21 +1,42 @@
+<% if @post.value == 0 %>
 <% if @post.user.image? %>
-  <%= image_tag @post.user.image.url, :size => '100x100' %>
-<% else %>
-  <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
-<% end %>
-<%= @post.user.name %>
-<%= @post.value %>
-<%= @post.body %>
-コメント数：<%= @post.post_comments.count %>
-<% if @post.favorited_by?(current_user) %>
-  <%= link_to post_favorites_path(@post), method: :delete, remote: true do %>
-    <span aria-hidden="true"></span>
-    <%= @post.favorites.count %>
+    <%= image_tag @post.user.image.url, :size => '100x100' %>
+  <% else %>
+    <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+  <% end %>
+  <%= @post.user.name %>
+  <%= @post.body %>
+  コメント数：<%= @post.post_comments.count %>
+  <% if @post.favorited_by?(current_user) %>
+    <%= link_to post_favorites_path(@post), method: :delete, remote: true do %>
+      <span aria-hidden="true"></span>
+      <%= @post.favorites.count %>
+    <% end %>
+  <% else %>
+    <%= link_to post_favorites_path(@post), method: :post, remote: true do %>
+      <span aria-hidden="true"></span>
+      <%= @post.favorites.count %>
+    <% end %>
   <% end %>
 <% else %>
-  <%= link_to post_favorites_path(@post), method: :post, remote: true do %>
-    <span aria-hidden="true"></span>
-    <%= @post.favorites.count %>
+  <% if @post.user.image? %>
+    <%= image_tag @post.user.image.url, :size => '100x100' %>
+  <% else %>
+    <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+  <% end %>
+  <%= @post.user.name %>
+  <%= @post.body %>
+  コメント数：<%= @post.post_comments.count %>
+  <% if @post.favorited_by?(current_user) %>
+    <%= link_to post_favorites_path(@post), method: :delete, remote: true do %>
+      <span aria-hidden="true"></span>
+      <%= @post.favorites.count %>
+    <% end %>
+  <% else %>
+    <%= link_to post_favorites_path(@post), method: :post, remote: true do %>
+      <span aria-hidden="true"></span>
+      <%= @post.favorites.count %>
+    <% end %>
   <% end %>
 <% end %>
 <div class="dropdown">

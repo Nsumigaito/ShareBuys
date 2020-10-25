@@ -28,15 +28,13 @@
     <% end %>
   <% end %>
 <% end %>
-<h3>ポイント</h3>
+<%= link_to 'ポイント', orders_path %>
 <% if current_user == @user %>
-	<%= link_to balance_path(@user.id) do %>
+	<%= link_to orders_path do %>
 		<% if @user.point == nil %>
 			<% @user.point = 0 %>
 		<% end %>
 		<%= @user.point %>
 	<% end %>
 <% end %>
-<h3>コレクション数</h3>
-<%= link_to @user.collections.count, collections_path(@user.id) %>
 <%= link_to "✉️", new_post_path %>

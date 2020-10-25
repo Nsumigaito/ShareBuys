@@ -4,10 +4,17 @@ class Users::PostsController < ApplicationController
 		@post = Post.new
 	end
 
+	def special_new
+		@post = Post.new
+	end
+
 	def create
 		@user = User.find(current_user.id)
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
+		if params[:normal]
+			@post.value = 0
+		end
 		if @post.save
 			redirect_to posts_path
 		else
@@ -17,6 +24,7 @@ class Users::PostsController < ApplicationController
 
 	def index
 		@posts = Post.all
+		@user = current_user
 	end
 
 	def show
@@ -38,6 +46,6 @@ class Users::PostsController < ApplicationController
 
 	private
 	def post_params
-		params.require(:post).permit(:body, :value, :is_report, :user)
+		params.require(:post).permit(:title, :body, :value, :is_report, :user)
 	end
 end

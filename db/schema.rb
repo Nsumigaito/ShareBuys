@@ -12,16 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_10_12_021056) do
 
-  create_table "collections", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
-    t.boolean "is_buying", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_collections_on_post_id"
-    t.index ["user_id"], name: "index_collections_on_user_id"
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -43,9 +33,16 @@ ActiveRecord::Schema.define(version: 2020_10_12_021056) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
-    t.integer "payment", null: false
+    t.integer "user_id"
+    t.integer "post_id"
+    t.string "name"
+    t.string "image"
+    t.string "title"
+    t.integer "value"
+    t.integer "comment_count"
+    t.integer "favorite_count"
+    t.integer "user_number"
+    t.integer "post_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_orders_on_post_id"
@@ -64,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_10_12_021056) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.string "title", null: false
     t.text "body", null: false
     t.integer "value", null: false
     t.boolean "is_report", default: false, null: false

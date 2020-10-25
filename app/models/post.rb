@@ -1,10 +1,15 @@
 class Post < ApplicationRecord
-  has_many :collections, dependent: :destroy
+  has_many :purchase, dependent: :destroy
   has_many :favorites, dependent: :destroy
   # has_many :notifications, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :post_comments, dependent: :destroy
+
   belongs_to :user
+
+  validates :title, presence: true
+  validates :body, presence: true, length: {maximum: 200}
+  validates :value, numericality: {greater_than: 0}
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?

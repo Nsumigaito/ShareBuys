@@ -28,9 +28,6 @@ Rails.application.routes.draw do
     get 'profile_edit' => 'users#profile_edit', as: 'profile_edit'
     patch 'profile_update' => 'users#profile_update', as: 'profile_update'
 
-  	# 残高画面へのルート
-  	get '/users/balance' => 'users#balance', as: 'balance'
-
   	# フォロー・フォロワー一覧へのルート
   	get '/users/:id/following' => 'users#following', as: 'following_user'
   	get '/users/:id/followers' => 'users#followers', as: 'followers_user'
@@ -44,9 +41,6 @@ Rails.application.routes.draw do
 
     # searches
     get 'searches' => 'searches#search'
-
-    # collections
-    get 'collections' => 'collections#index'
 
     # posts
     resources :posts, only: [:new, :create, :index, :show, :destroy] do
@@ -62,10 +56,10 @@ Rails.application.routes.draw do
     patch '/post/:id' => 'posts#report', as: 'report'
 
     # orders
-    resources :orders, only: [:new, :create, :index]
+    resources :orders, only: [:create, :index]
 
-    # 注文確認画面
-    get '/post/confilm' => 'posts#confilm', as: 'confilm'
+    # 購入確認画面
+    get 'orders/:id/confilm' => 'orders#confilm', as: 'confilm'
 
     # notifications
     resources :notifications, only: [:index]
