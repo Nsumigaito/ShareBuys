@@ -1,0 +1,30 @@
+<% if @post.user.image? %>
+  <%= image_tag @post.user.image.url, :size => '100x100' %>
+<% else %>
+  <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+<% end %>
+<%= @post.user.name %>
+<%= @post.value %>
+<%= @post.body %>
+コメント数：<%= @post.post_comments.count %>
+<%= @post.favorites.count %>
+<%= @user.point %>
+<% if @user.point == nil %>
+	<% @user.point = 0 %>
+<% end %>
+<% if @user.point - @post.value < 0 %>
+	ポイントが足りません
+<% else %>
+残高<%= @user.point - @post.value %>
+<%= form_for @order do |f| %>
+<%= f.hidden_field :user_number, value: @post.user_id %>
+<%= f.hidden_field :post_number, value: @post.id %>
+<%= f.hidden_field :name, value: @post.user.name %>
+<%= f.hidden_field :image, value: @post.user.image %>
+<%= f.hidden_field :title, value: @post.title %>
+<%= f.hidden_field :value, value: @post.value %>
+<%= f.hidden_field :comment_count, value: @post.post_comments.count %>
+<%= f.hidden_field :favorite_count, value: @post.favorites.count %>
+<%= f.submit '購入' %>
+<% end %>
+<% end %>

@@ -4,7 +4,6 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true, null: false
       t.string :title, null: false
       t.text :body, null: false
-      t.string :post_image, null: false
       t.integer :value, null: false
       t.boolean :is_report, null: false, default: false
 

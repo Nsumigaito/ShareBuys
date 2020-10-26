@@ -1,0 +1,46 @@
+<% @users.each do |user| %>
+	<% if user.image? %>
+	  <%= image_tag user.image.url, :size => '100x100' %>
+	<% else %>
+	  <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+	<% end %>
+	<%= user.name %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <%= link_to(post_path(post.id)) do %>
+    <% if post.user.image? %>
+      <%= image_tag post.user.image.url, :size => '100x100' %>
+    <% else %>
+      <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+    <% end %>
+    <%= post.user.name %>
+    <%= post.value %>
+    <%= post.body %>
+    コメント数：<%= post.post_comments.count %>
+    <% if post.favorited_by?(current_user) %>
+      <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
+        <span aria-hidden="true"></span>
+        <%= post.favorites.count %>
+      <% end %>
+    <% else %>
+      <%= link_to post_favorites_path(post), method: :post, remote: true do %>
+        <span aria-hidden="true"></span>
+        <%= post.favorites.count %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="dropdown">
+    <!-- 切替ボタンの設定 -->
+    <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+    <!-- ドロップメニューの設定 -->
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <% if current_user.id == post.user.id %>
+        <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
+        <%= link_to "報告", report_path(post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+      <% else %>
+        <%= link_to "報告", report_path(post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
