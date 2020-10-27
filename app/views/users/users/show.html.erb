@@ -3,38 +3,258 @@
 <% else %>
   <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
 <% end %>
-<h3>名前</h3>
+
 <%= @user.name %>
-<h3>introduction</h3>
+
 <%= @user.introduction %>
-<h3>フォロー</h3>
+
 <%= link_to @user.relationships.count, following_user_path(@user.id) %>
-<h3>フォロワー</h3>
 <%= link_to @user.reverse_of_relationships.count, followers_user_path(@user.id) %>
-<% unless current_user == @user %>
+
+<% if current_user == @user %>
+  <%= link_to 'ポイント残高／購入履歴', orders_path %>
+<% else %>
   <% if current_user.following?(@user) %>
     <%= form_for(current_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f| %>
-
       <%= hidden_field_tag :follow_id, @user.id %>
       <%= f.submit 'フォロー外す' %>
-
     <% end %>
   <% else %>
     <%= form_for(current_user.relationships.build) do |f| %>
-
       <%= hidden_field_tag :follow_id, @user.id %>
       <%= f.submit 'フォローする' %>
-
     <% end %>
   <% end %>
 <% end %>
-<%= link_to 'ポイント', orders_path %>
-<% if current_user == @user %>
-	<%= link_to orders_path do %>
-		<% if @user.point == nil %>
-			<% @user.point = 0 %>
-		<% end %>
-		<%= @user.point %>
-	<% end %>
-<% end %>
+
 <%= link_to "✉️", new_post_path %>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#posts" class="nav-link" data-toggle="tab">投稿</a>
+  </li>
+  <li class="nav-item">
+    <a href="#comments" class="nav-link" data-toggle="tab">返信</a>
+  </li>
+  <li class="nav-item">
+    <a href="#favorites" class="nav-link" data-toggle="tab">いいね</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div id="posts" class="tab-pane active">
+    <% @posts.each do |post| %>
+      <% if post.value == 0 %>
+        <%= link_to user_path(post.user) do %>
+          <% if post.user.image? %>
+            <%= image_tag post.user.image.url, :size => '100x100' %>
+          <% else %>
+            <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+          <% end %>
+          <%= post.user.name %>
+        <% end %>
+        <%= link_to post_path(post.id) do %>
+          <%= post.body %>
+          コメント数：<%= post.post_comments.count %>
+          <% if post.favorited_by?(current_user) %>
+            <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
+              <span aria-hidden="true"></span>
+              <%= post.favorites.count %>
+            <% end %>
+          <% else %>
+            <%= link_to post_favorites_path(post), method: :post, remote: true do %>
+              <span aria-hidden="true"></span>
+              <%= post.favorites.count %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% if (current_user == post.user) || (current_user.orders.exists?(post_number: post.id)) %>
+          <%= link_to user_path(post.user) do %>
+            <% if post.user.image? %>
+              <%= image_tag post.user.image.url, :size => '100x100' %>
+            <% else %>
+              <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+            <% end %>
+            <%= post.user.name %>
+          <% end %>
+          <%= link_to post_path(post.id) do %>
+            <%= post.title %>
+            価値<%= post.value %>
+            コメント数：<%= post.post_comments.count %>
+            <% if post.favorited_by?(current_user) %>
+              <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
+                <span aria-hidden="true"></span>
+                <%= post.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to post_favorites_path(post), method: :post, remote: true do %>
+                <span aria-hidden="true"></span>
+                <%= post.favorites.count %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= link_to user_path(post.user) do %>
+            <% if post.user.image? %>
+              <%= image_tag post.user.image.url, :size => '100x100' %>
+            <% else %>
+              <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+            <% end %>
+            <%= post.user.name %>
+          <% end %>
+          <%= link_to confilm_path(post.id) do %>
+            購入すると本文が見れるようになります
+            価値<%= post.value %>
+            コメント数：<%= post.post_comments.count %>
+            <% if post.favorited_by?(current_user) %>
+              <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
+                <span aria-hidden="true"></span>
+                <%= post.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to post_favorites_path(post), method: :post, remote: true do %>
+                <span aria-hidden="true"></span>
+                <%= post.favorites.count %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+      <% end %>
+        <div class="dropdown">
+          <!-- 切替ボタンの設定 -->
+          <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <!-- ドロップメニューの設定 -->
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% if current_user.id == post.user.id %>
+              <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
+              <%= link_to "報告", report_path(post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+            <% else %>
+              <%= link_to "報告", report_path(post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+  </div>
+  <div id="comments" class="tab-pane">
+    <% @post_comments.each do |post_comment| %>
+      <% if post_comment.user.image? %>
+        <%= image_tag post_comment.user.image.url, :size => '100x100' %>
+      <% else %>
+        <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+      <% end %>
+      <%= post_comment.user.name %>
+      <%= link_to post_path(post_comment.post) do %>
+        <%= post_comment.comment %>
+      <% end %>
+      <div class="dropdown">
+        <!-- 切替ボタンの設定 -->
+        <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <!-- ドロップメニューの設定 -->
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <% if current_user == post_comment.user %>
+            <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "本当に消しますか？" %>
+            <%= link_to "報告", post_comment_report_path(post_comment.post, post_comment), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+          <% else %>
+            <%= link_to "報告", post_comment_report_path(post_comment.post, post_comment), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div id="favorites" class="tab-pane">
+    <% @favorite_posts.each do |favorite_post| %>
+      <% if favorite_post.post.value == 0 %>
+        <%= link_to user_path(favorite_post.post.user) do %>
+          <% if favorite_post.post.user.image? %>
+            <%= image_tag favorite_post.post.user.image.url, :size => '100x100' %>
+          <% else %>
+            <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+          <% end %>
+        <% end %>
+        <%= link_to post_path(favorite_post.post.id) do %>
+          <%= favorite_post.post.user.name %>
+          <%= favorite_post.post.body %>
+          コメント数：<%= favorite_post.post.post_comments.count %>
+          <% if favorite_post.post.favorited_by?(current_user) %>
+            <%= link_to post_favorites_path(favorite_post.post), method: :delete, remote: true do %>
+              <span aria-hidden="true"></span>
+              <%= favorite_post.post.favorites.count %>
+            <% end %>
+          <% else %>
+            <%= link_to post_favorites_path(favorite_post.post), method: :post, remote: true do %>
+              <span aria-hidden="true"></span>
+              <%= favorite_post.post.favorites.count %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% if (current_user == favorite_post.post.user) || (current_user.orders.exists?(post_number: favorite_post.post.id)) %>
+          <%= link_to user_path(favorite_post.post.user) do %>
+            <% if favorite_post.post.user.image? %>
+              <%= image_tag favorite_post.post.user.image.url, :size => '100x100' %>
+            <% else %>
+              <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+            <% end %>
+          <% end %>
+          <%= link_to post_path(favorite_post.post.id) do %>
+            <%= favorite_post.post.user.name %>
+            <%= favorite_post.post.title %>
+            価値<%= favorite_post.post.value %>
+            コメント数：<%= favorite_post.post.post_comments.count %>
+            <% if favorite_post.post.favorited_by?(current_user) %>
+              <%= link_to post_favorites_path(favorite_post.post), method: :delete, remote: true do %>
+                <span aria-hidden="true"></span>
+                <%= favorite_post.post.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to post_favorites_path(favorite_post.post), method: :post, remote: true do %>
+                <span aria-hidden="true"></span>
+                <%= favorite_post.post.favorites.count %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= link_to user_path(favorite_post.post.user) do %>
+            <% if favorite_post.post.user.image? %>
+              <%= image_tag favorite_post.post.user.image.url, :size => '100x100' %>
+            <% else %>
+              <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+            <% end %>
+          <% end %>
+          <%= link_to confilm_path(favorite_post.post.id) do %>
+            <%= favorite_post.post.user.name %>
+            購入すると本文が見れるようになります
+            価値<%= favorite_post.post.value %>
+            コメント数：<%= favorite_post.post.post_comments.count %>
+            <% if favorite_post.post.favorited_by?(current_user) %>
+              <%= link_to post_favorites_path(favorite_post.post), method: :delete, remote: true do %>
+                <span aria-hidden="true"></span>
+                <%= favorite_post.post.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to post_favorites_path(favorite_post.post), method: :post, remote: true do %>
+                <span aria-hidden="true"></span>
+                <%= favorite_post.post.favorites.count %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <div class="dropdown">
+          <!-- 切替ボタンの設定 -->
+          <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <!-- ドロップメニューの設定 -->
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% if current_user.id == favorite_post.post.user.id %>
+              <%= link_to "削除", post_path(favorite_post.post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
+              <%= link_to "報告", report_path(favorite_post.post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+            <% else %>
+              <%= link_to "報告", report_path(favorite_post.post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

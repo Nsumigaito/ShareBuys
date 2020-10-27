@@ -1,0 +1,20 @@
+<% @post_comments.each do |post_comment| %>
+  <%= link_to(post_path(post_comment.post.id)) do %>
+    <% if post_comment.user.image? %>
+      <%= image_tag post_comment.user.image.url, :size => '100x100' %>
+    <% else %>
+      <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+    <% end %>
+    <%= post_comment.user.name %>
+  <% end %>
+  <div class="dropdown">
+    <!-- 切替ボタンの設定 -->
+    <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+    <!-- ドロップメニューの設定 -->
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "本当に消しますか？" %>
+        <%= link_to "報告取消", admins_cancel_comment_report_path(post_comment.post, post_comment), method: :patch, "data-confirm" => "報告を取り消しますか？" %>
+    </div>
+  </div>
+  <%= post_comment.comment %>
+<% end %>

@@ -8,13 +8,17 @@ class Users::OrdersController < ApplicationController
 	def create
 		@order = current_user.orders.build(order_params)
 		@order.save(order_params)
-		@user = current_user
-		@point = @user.point - @order.value
-		@user.update(point: @point)
+		@current_user = current_user
+		@user = User.find(@order.user_number)
+		@you_point = @user.point + @order.value
+		@user.update(point: @you_point)
+		@my_point = @current_user.point - @order.value
+		@current_user.update(point: @my_point)
 		redirect_to orders_path
 	end
 
 	def index
+		@user = current_user
 		@orders = current_user.orders.order("created_at DESC")
 	end
 

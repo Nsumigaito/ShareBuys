@@ -1,12 +1,14 @@
 <% @posts.each do |post| %>
 <% if post.value == 0 %>
-  <%= link_to(post_path(post.id)) do %>
+  <%= link_to user_path(post.user) do %>
     <% if post.user.image? %>
       <%= image_tag post.user.image.url, :size => '100x100' %>
     <% else %>
       <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
     <% end %>
     <%= post.user.name %>
+  <% end %>
+  <%= link_to post_path(post.id) do %>
     <%= post.body %>
     コメント数：<%= post.post_comments.count %>
     <% if post.favorited_by?(current_user) %>
@@ -23,13 +25,15 @@
   <% end %>
 <% else %>
   <% if (current_user == post.user) || (current_user.orders.exists?(post_number: post.id)) %>
-    <%= link_to post_path(post.id) do %>
+    <%= link_to user_path(post.user) do %>
       <% if post.user.image? %>
         <%= image_tag post.user.image.url, :size => '100x100' %>
       <% else %>
         <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
       <% end %>
       <%= post.user.name %>
+    <% end %>
+    <%= link_to post_path(post.id) do %>
       <%= post.title %>
       価値<%= post.value %>
       コメント数：<%= post.post_comments.count %>
@@ -46,13 +50,15 @@
       <% end %>
     <% end %>
   <% else %>
-    <%= link_to confilm_path(post.id) do %>
+    <%= link_to user_path(post.user) do %>
       <% if post.user.image? %>
         <%= image_tag post.user.image.url, :size => '100x100' %>
       <% else %>
         <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
       <% end %>
       <%= post.user.name %>
+    <% end %>
+    <%= link_to confilm_path(post.id) do %>
       購入すると本文が見れるようになります
       価値<%= post.value %>
       コメント数：<%= post.post_comments.count %>
@@ -69,9 +75,6 @@
       <% end %>
     <% end %>
   <% end %>
-
-
-
 <% end %>
   <div class="dropdown">
     <!-- 切替ボタンの設定 -->
@@ -87,14 +90,5 @@
     </div>
   </div>
 <% end %>
-
-
 <%= link_to "✉️", new_post_path %>
-
-<%= form_tag(searches_path, method: :get) do %>
-
-  <%= text_field_tag(:word) %>
-  <%= submit_tag '検索' %>
-
-<% end %>
 

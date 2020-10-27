@@ -11,6 +11,12 @@ Rails.application.routes.draw do
 
     # 報告された投稿の報告取消
     patch '/admins/post/:id' => 'posts#cancel_report', as: 'cancel_report'
+
+    # 報告されたコメント一覧
+    get '/admins/post_comments' => 'posts#comment_index', as: 'post_comments'
+
+    # 報告されたコメントの報告取消
+    patch '/admins/post_comment/:id' => 'posts#cancel_comment_report', as: 'cancel_comment_report'
   end
 
   scope module: :users do
@@ -33,8 +39,8 @@ Rails.application.routes.draw do
   	get '/users/:id/followers' => 'users#followers', as: 'followers_user'
 
   	# 退会処理
-  	get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe_users'
-    patch '/users/withdraw' => 'users#withdraw', as: 'withdraw_users'
+  	get 'unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+    patch 'withdraw' => 'users#withdraw', as: 'withdraw'
 
     # relationships
     resources :relationships, only: [:create, :destroy]
@@ -48,6 +54,9 @@ Rails.application.routes.draw do
     	# 投稿へのコメント
     	resources :post_comments, only: [:create, :destroy]
 
+      # コメントを報告する
+      patch '/post_comments/:id' => 'post_comments#report', as: 'comment_report'
+
     	# 投稿へのいいね
     	resource :favorites, only: [:create, :destroy]
     end
@@ -60,9 +69,6 @@ Rails.application.routes.draw do
 
     # 購入確認画面
     get 'orders/:id/confilm' => 'orders#confilm', as: 'confilm'
-
-    # notifications
-    resources :notifications, only: [:index]
 
     # 設定画面
     get '/setting' => 'sets#setting', as: 'setting'

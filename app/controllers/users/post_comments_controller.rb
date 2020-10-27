@@ -12,8 +12,13 @@ class Users::PostCommentsController < ApplicationController
 	    redirect_to request.referrer
 	end
 
+	def report
+		PostComment.find_by(id: params[:id], post_id: params[:post_id]).update(is_report: true)
+		redirect_to request.referrer
+	end
+
 	private
 	def post_comment_params
-		params.require(:post_comment).permit(:comment)
+		params.require(:post_comment).permit(:comment, :is_report)
 	end
 end

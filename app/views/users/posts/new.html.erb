@@ -1,44 +1,56 @@
-<%= form_for(@post) do |f| %>
- 	<%= render "users/shared/error_messages", resource: @post %>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#normal" class="nav-link" data-toggle="tab">ノーマル投稿</a>
+  </li>
+  <li class="nav-item">
+    <a href="#special" class="nav-link" data-toggle="tab">スペシャル投稿</a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div id="normal" class="tab-pane active">
+    <%= form_for(@post) do |f| %>
+      <%= render "users/shared/error_messages", resource: @post %>
+      <div class="field">
+        <%= f.label :title %><br />
+        <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :title %><br />
-      <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
-    </div>
+      <div class="field">
+        <%= f.label :body %><br />
+        <%= f.text_area :body, autofocus: true, autocomplete: "body" %>
+      </div>
 
-  	<div class="field">
-    	<%= f.label :body %><br />
-    	<%= f.text_area :body, autofocus: true, autocomplete: "body" %>
-  	</div>
+      <div class="field">
+        <%= f.label :value %><br />
+        0
+      </div>
 
-    <div class="field">
-      <%= f.label :value %><br />
-      0
-    </div>
+      <div class="actions">
+        <%= f.submit "normal投稿", name: 'normal' %>
+      </div>
+    <% end %>
+  </div>
+  <div id="special" class="tab-pane">
+    <%= form_for(@post) do |f| %>
+      <%= render "users/shared/error_messages", resource: @post %>
+      <div class="field">
+        <%= f.label :title %><br />
+        <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+      </div>
 
-  	<div class="actions">
-    	<%= f.submit "normal投稿", name: 'normal' %>
-  	</div>
-<% end %>
-<%= form_for(@post) do |f| %>
-  <%= render "users/shared/error_messages", resource: @post %>
+      <div class="field">
+        <%= f.label :body %><br />
+        <%= f.text_area :body, autofocus: true, autocomplete: "body" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :title %><br />
-      <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
-    </div>
+      <div class="field">
+        <%= f.label :value %><br />
+        <%= f.number_field :value, autofocus: true, autocomplete: "value" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :body %><br />
-      <%= f.text_area :body, autofocus: true, autocomplete: "body" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :value %><br />
-      <%= f.number_field :value, autofocus: true, autocomplete: "value" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "special投稿", name: 'special' %>
-    </div>
-<% end %>
+      <div class="actions">
+        <%= f.submit "special投稿", name: 'special' %>
+      </div>
+    <% end %>
+  </div>
+</div>
