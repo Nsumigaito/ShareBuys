@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   </head>
 
   <body>
@@ -25,7 +26,7 @@
             <%= link_to "マイページ", user_path(current_user.id) %>
             <%= link_to "設定", setting_path %>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
-            <%= link_to "退会", unsubscribe_users_path(current_user) %>
+            <%= link_to "退会", unsubscribe_path %>
           <% else %>
             <h5>ようこそ</h5>
             <%= link_to "新規登録", new_user_registration_path %>
@@ -33,11 +34,22 @@
           <% end %>
         </div>
       </div>
-      <%= link_to 'logo', posts_path %>
+      <% if user_signed_in? %>
+        <%= link_to 'logo', posts_path %>
+      <% else %>
+        <%= link_to 'logo', root_path %>
+      <% end %>
+      <%= link_to 'admin', admins_root_path %>
     </header><!-- /header -->
     <%= yield %>
-    <footer style = "height:50px;background-color:black;">
-      
+    <footer style = "height:50px;background-color:black;">>
+        <% if current_page?(posts_path) %>
+          <%= form_tag(searches_path, method: :get) do %>
+            <%= text_field_tag(:word) %>
+            <%= submit_tag '検索' %>
+          <% end %>
+        <% end %>
+      </div>
     </footer>
   </body>
 </html>

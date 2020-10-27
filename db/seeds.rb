@@ -49,14 +49,3 @@ users = User.create!(   name:  "ユーザー3",
                         is_deleted: false,
                         is_admin: false
                     )
-users = User.create!(   name:  "ユーザー4",
-                        introduction: "たちつてと",
-                        image: open("./db/fixtures/142_refileDownloadImage.png"),
-                        point: 1000,
-                        telephone: "44455556666",
-                        email: "user40@example.jp",
-                        password:  "Nagi7230",
-                        password_confirmation: "Nagi7230",
-                        is_deleted: false,
-                        is_admin: false
-                    )

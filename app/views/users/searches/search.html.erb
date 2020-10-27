@@ -1,20 +1,24 @@
 <% @users.each do |user| %>
-	<% if user.image? %>
-	  <%= image_tag user.image.url, :size => '100x100' %>
-	<% else %>
-	  <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
-	<% end %>
-	<%= user.name %>
+  <%= link_to user_path(user) do %>
+    <% if user.image? %>
+      <%= image_tag user.image.url, :size => '100x100' %>
+    <% else %>
+      <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+    <% end %>
+    <%= user.name %>
+  <% end %>
 <% end %>
 
 <% @posts.each do |post| %>
-  <%= link_to(post_path(post.id)) do %>
+  <%= link_to user_path(post.user) do %>
     <% if post.user.image? %>
       <%= image_tag post.user.image.url, :size => '100x100' %>
     <% else %>
       <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
     <% end %>
     <%= post.user.name %>
+  <% end %>
+  <%= link_to(post_path(post.id)) do %>
     <%= post.value %>
     <%= post.body %>
     コメント数：<%= post.post_comments.count %>

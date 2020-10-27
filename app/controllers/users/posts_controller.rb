@@ -23,8 +23,9 @@ class Users::PostsController < ApplicationController
 	end
 
 	def index
-		@posts = Post.all
 		@user = current_user
+	    @users = @user.followings.all
+	    @posts = Post.where(user_id: @users).or(Post.where(user_id: @current_user)).order("created_at DESC")
 	end
 
 	def show
@@ -35,13 +36,13 @@ class Users::PostsController < ApplicationController
 	def destroy
 		@post = Post.find(params[:id])
 		@post.destroy
-		redirect_to posts_path
+		redirect_to request.referrer
 	end
 
 	def report
 		@post = Post.find(params[:id])
 		@post.update(is_report: true)
-		redirect_to posts_path
+		redirect_to request.referrer
 	end
 
 	private

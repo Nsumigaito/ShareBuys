@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_10_12_021056) do
     t.integer "user_id", null: false
     t.integer "post_id", null: false
     t.text "comment", null: false
+    t.boolean "is_report", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_post_comments_on_post_id"
