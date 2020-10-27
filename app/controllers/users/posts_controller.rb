@@ -9,9 +9,11 @@ class Users::PostsController < ApplicationController
 	end
 
 	def create
-		@user = User.find(current_user.id)
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
+		@user = current_user
+		@add_point = @user.point + 100
+		@user.update(point: @add_point)
 		if params[:normal]
 			@post.value = 0
 		end
