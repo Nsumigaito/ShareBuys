@@ -1,4 +1,6 @@
 class Users::OrdersController < ApplicationController
+  	before_action :authenticate_user!
+
 	def confilm
 		@post = Post.find(params[:id])
 		@user = current_user
