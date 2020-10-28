@@ -1,30 +1,79 @@
-<% if @post.user.image? %>
-  <%= image_tag @post.user.image.url, :size => '100x100' %>
-<% else %>
-  <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
-<% end %>
-<%= @post.user.name %>
-<%= @post.value %>
-<%= @post.body %>
-コメント数：<%= @post.post_comments.count %>
-<%= @post.favorites.count %>
-<%= @user.point %>
-<% if @user.point == nil %>
-	<% @user.point = 0 %>
-<% end %>
-<% if @user.point - @post.value < 0 %>
-	ポイントが足りません
-<% else %>
-残高<%= @user.point - @post.value %>
-<%= form_for @order do |f| %>
-<%= f.hidden_field :user_number, value: @post.user_id %>
-<%= f.hidden_field :post_number, value: @post.id %>
-<%= f.hidden_field :name, value: @post.user.name %>
-<%= f.hidden_field :image, value: @post.user.image %>
-<%= f.hidden_field :title, value: @post.title %>
-<%= f.hidden_field :value, value: @post.value %>
-<%= f.hidden_field :comment_count, value: @post.post_comments.count %>
-<%= f.hidden_field :favorite_count, value: @post.favorites.count %>
-<%= f.submit '購入' %>
-<% end %>
-<% end %>
+<div class = "container">
+  <div class = "row mt-5">
+  	<div class = "offset-md-1">
+  	  <h1 class = "text-success">購入確認画面</h1>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "col-md-12">
+  	  <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
+  	  	<div class = "row">
+          <div class = "col-md-2">
+			<% if @post.user.image? %>
+		  	  <%= image_tag @post.user.image.url, :size => '50x50' %>
+			<% else %>
+	 	 	  <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+			<% end %>
+		  </div>
+		  <div class = "col-md-5">
+			<%= @post.user.name %>
+		  </div>
+		  <div class = "col-md-5">
+			<%= @post.value %>
+		  </div>
+		</div>
+		<div class = "row">
+          <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen; border-bottom:1px solid limegreen;">
+            <div class = "col-md-12 mb-3">
+              <%= @post.title %>
+            </div>
+          </div>
+        </div>
+        <div class = "offset-md-1 col-md-10">
+          <div class = "row">
+            <div class = "col-md-2">
+              返信数：<%= @post.post_comments.count %>
+            </div>
+            <div class = "offset-md-8">
+              いいね数：<%= @post.favorites.count %>
+            </div>
+          </div>
+        </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "offset-md-1">
+  	  <h1 class = "text-success">ポイント会計</h1>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "offset-md-2">
+  	  <h3>現在のポイント：<%= @user.point %></h3>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "offset-md-2">
+	  <% if @user.point == nil %>
+	    <% @user.point = 0 %>
+	  <% end %>
+
+	  <% if @user.point - @post.value < 0 %>
+		ポイントが足りません
+	  <% else %>
+  	    <h3>支払い後のポイント：<%= @user.point - @post.value %></h3>
+  	    <%= form_for @order do |f| %>
+		<%= f.hidden_field :user_number, value: @post.user_id %>
+		<%= f.hidden_field :post_number, value: @post.id %>
+		<%= f.hidden_field :name, value: @post.user.name %>
+		<%= f.hidden_field :image, value: @post.user.image %>
+		<%= f.hidden_field :title, value: @post.title %>
+		<%= f.hidden_field :value, value: @post.value %>
+		<%= f.hidden_field :comment_count, value: @post.post_comments.count %>
+		<%= f.hidden_field :favorite_count, value: @post.favorites.count %><br>
+		<%= f.submit '購入', class: 'btn btn-outline-success' %>
+		<% end %>
+	  <% end %>
+  	</div>
+  </div>
+</div>
