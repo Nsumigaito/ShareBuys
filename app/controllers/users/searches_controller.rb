@@ -5,8 +5,8 @@ class Users::SearchesController < ApplicationController
 		if @word == nil
 			redirect_to request.referrer
 		else
-			@users = User.search(@word)
-			@posts = Post.search(@word)
+			@users = User.search(@word).order("created_at DESC")
+			@posts = Post.search(@word).order("created_at DESC")
 		end
 	end
 end
