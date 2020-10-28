@@ -40,11 +40,11 @@
         <div class = "col-md-5">
           <% if user_signed_in? %>
             <%= link_to posts_path do %>
-              <%= image_tag "/assets/logo2.jpg", size: '200x60' %>
+              <%= image_tag asset_path('logo2.jpg'), size: '200x60' %>
             <% end %>
           <% else %>
             <%= link_to root_path do %>
-              <%= image_tag "/assets/logo2.jpg", size: '200x60' %>
+              <%= image_tag asset_path('logo2.jpg'), size: '200x60' %>
             <% end %>
           <% end %>
         </div>

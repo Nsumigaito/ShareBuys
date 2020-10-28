@@ -22,9 +22,9 @@
           <div class = "field mb-3">
             <%= f.label :プロフィール画像, class: 'text-success' %><br />
             <% if @user.image? %>
-              <%= image_tag @user.image.url, :size => '100x100' %>
+              <%= image_tag asset_path(@user.image.url), :size => '100x100' %>
             <% else %>
-              <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+              <%= image_tag asset_path('no_image.jpg'), :size => '100x100' %>
             <% end %>
             <button type="button" class="btn btn-outline-success rounded-pill">
               <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>

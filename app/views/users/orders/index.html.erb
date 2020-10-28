@@ -22,9 +22,9 @@
 	        <div class = "row">
               <div class = "col-md-2">
 			    <% if order.image? %>
-			      <%= image_tag order.image, :size => '50x50' %>
+			      <%= image_tag asset_path(order.image), :size => '50x50' %>
 			    <% else %>
-			      <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+			      <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
 			    <% end %>
 			  </div>
 			  <div class = "col-md-5">
