@@ -5,9 +5,9 @@
 	    <div class = "row mb-3">
           <%= link_to user_path(user.id) do %>
             <% if user.image? %>
-              <%= image_tag user.image.url, :size => '100x100' %>
+              <%= image_tag asset_path(user.image.url), :size => '100x100' %>
             <% else %>
-              <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+              <%= image_tag asset_path("/assets/no_image.jpg"), :size => '100x100' %>
             <% end %>
             <%= user.name %>
           <% end %>

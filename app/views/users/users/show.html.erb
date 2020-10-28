@@ -5,9 +5,9 @@
         <div class = "row">
           <div class = "col-md-6">
             <% if @user.image? %>
-              <%= image_tag @user.image.url, :size => '100x100' %>
+              <%= image_tag asset_path(@user.image.url), :size => '100x100' %>
             <% else %>
-              <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+              <%= image_tag asset_path("/assets/no_image.jpg"), :size => '100x100' %>
             <% end %>
           </div>
           <div class = "col-md-6 pt-4">
@@ -71,9 +71,9 @@
                   <div class = "row">
                     <div class = "col-md-2">
                       <% if post.user.image? %>
-                        <%= image_tag post.user.image.url, :size => '50x50' %>
+                        <%= image_tag asset_path(post.user.image.url), :size => '50x50' %>
                       <% else %>
-                        <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+                        <%= image_tag asset_path("/assets/no_image.jpg"), :size => '50x50' %>
                       <% end %>
                     </div>
                     <div class = "col-md-5">
@@ -116,9 +116,9 @@
                     <div class = "row">
                       <div class = "col-md-2">
                         <% if post.user.image? %>
-                          <%= image_tag post.user.image.url, :size => '50x50' %>
+                          <%= image_tag asset_path(post.user.image.url), :size => '50x50' %>
                         <% else %>
-                          <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+                          <%= image_tag asset_path("/assets/no_image.jpg"), :size => '50x50' %>
                         <% end %>
                       </div>
                       <div class = "col-md-5">
@@ -163,9 +163,9 @@
                     <div class = "row">
                       <div class = "col-md-2">
                         <% if post.user.image? %>
-                          <%= image_tag post.user.image.url, :size => '50x50' %>
+                          <%= image_tag asset_path(post.user.image.url), :size => '50x50' %>
                         <% else %>
-                          <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+                          <%= image_tag asset_path("/assets/no_image.jpg"), :size => '50x50' %>
                         <% end %>
                       </div>
                       <div class = "col-md-5">
@@ -236,9 +236,9 @@
               <div class = "row">
                 <div class = "col-md-2">
                   <% if post_comment.user.image? %>
-                    <%= image_tag post_comment.user.image.url, :size => '50x50' %>
+                    <%= image_tag asset_path(post_comment.user.image.url), :size => '50x50' %>
                   <% else %>
-                    <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+                    <%= image_tag asset_path("/assets/no_image.jpg"), :size => '50x50' %>
                   <% end %>
                 </div>
                 <div class = "col-md-5">
@@ -284,9 +284,9 @@
                   <div class = "row">
                     <div class = "col-md-2">
                       <% if favorite_post.post.user.image? %>
-                        <%= image_tag favorite_post.post.user.image.url, :size => '50x50' %>
+                        <%= image_tag asset_path(favorite_post.post.user.image.url), :size => '50x50' %>
                       <% else %>
-                        <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+                        <%= image_tag asset_path("/assets/no_image.jpg"), :size => '50x50' %>
                       <% end %>
                     </div>
                     <div class = "col-md-5">
@@ -329,9 +329,9 @@
                     <div class = "row">
                       <div class = "col-md-2">
                         <% if favorite_post.post.user.image? %>
-                          <%= image_tag favorite_post.post.user.image.url, :size => '50x50' %>
+                          <%= image_tag asset_path(favorite_post.post.user.image.url), :size => '50x50' %>
                         <% else %>
-                          <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+                          <%= image_tag asset_path("/assets/no_image.jpg"), :size => '50x50' %>
                         <% end %>
                       </div>
                       <div class = "col-md-5">
@@ -376,9 +376,9 @@
                     <div class = "row">
                       <div class = "col-md-2">
                         <% if favorite_post.post.user.image? %>
-                          <%= image_tag favorite_post.post.user.image.url, :size => '50x50' %>
+                          <%= image_tag asset_path(favorite_post.post.user.image.url), :size => '50x50' %>
                         <% else %>
-                          <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+                          <%= image_tag asset_path("/assets/no_image.jpg"), :size => '50x50' %>
                         <% end %>
                       </div>
                       <div class = "col-md-5">
