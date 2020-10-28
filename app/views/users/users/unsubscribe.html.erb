@@ -1,3 +1,17 @@
-<h1>本当に退会しますか？</h1>
-<%= link_to 'する', withdraw_path, method: :patch %>
-<%= link_to 'しない', user_path(current_user) %>
+<div class = "container">
+  <div class = "row mt-5">
+  	<div class = "offset-md-1">
+	  <h1 class = "text-success">本当に退会しますか？</h1>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "mx-auto mt-5">
+	  <%= link_to withdraw_path, method: :patch do %>
+	  	<h2 class = "btn btn-danger mr-5">退会する</h2>
+	  <% end %>
+	  <%= link_to user_path(current_user) do %>
+	  	<h2 class = "btn btn-primary ml-5">退会しない</h2>
+	  <% end %>
+  	</div>
+  </div>
+</div>
