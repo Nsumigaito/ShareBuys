@@ -6,9 +6,9 @@ class Users::UsersController < ApplicationController
     if @user.point == nil
       @user.update(point: 0)
     end
-    @posts = @user.posts.all
-    @post_comments = @user.post_comments.all
-    @favorite_posts = @user.favorites.all
+    @posts = @user.posts.order("created_at DESC")
+    @post_comments = @user.post_comments.order("created_at DESC")
+    @favorite_posts = @user.favorites.order("created_at DESC")
 	end
 
 	def profile_edit
