@@ -1,6 +1,14 @@
 class Users::UsersController < ApplicationController
+  before_action :authenticate_user!
+
 	def show
 		@user = User.find(params[:id])
+    if @user.point == nil
+      @user.update(point: 0)
+    end
+    @posts = @user.posts.all
+    @post_comments = @user.post_comments.all
+    @favorite_posts = @user.favorites.all
 	end
 
 	def profile_edit
@@ -8,11 +16,12 @@ class Users::UsersController < ApplicationController
 	end
 
 	def profile_update
- 	 	current_user.assign_attributes(user_params)
-  	if current_user.save
-  		redirect_to users_path
+    @user = current_user
+ 	 	@user.assign_attributes(user_params)
+  	if @user.update(user_params)
+  		redirect_to user_path(@user)
   	else
-  		render :edit
+  		render 'profile_edit'
   	end
 	end
 
@@ -41,7 +50,7 @@ class Users::UsersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:name, :email, :password, :password_confirmation, :introduce, :image,
+		params.require(:user).permit(:name, :email, :password, :password_confirmation, :introduction, :image,
 										:point, :telephone, :is_deleted, :is_admin)
 	end
 end

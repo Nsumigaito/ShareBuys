@@ -8,36 +8,63 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   </head>
 
-  <body>
-    <header style = "height:100px;background-color:black;">
-      <div class="dropdown">
-        <!-- 切替ボタンの設定 -->
-        <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ドロップダウンボタン
-        </button>
-        <!-- ドロップメニューの設定 -->
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <body style = "background-color:#e6ffe9;">
+    <header class = "sticky-top" style = "height:60px;background-color:#afeebd;border:1px solid palegreen;">
+      <div class = "row">
+        <div class = "col-md-5">
+          <div class="dropdown">
+            <!-- 切替ボタンの設定 -->
+            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ドロップダウンボタン
+            </button>
+            <!-- ドロップメニューの設定 -->
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style = "width:350px;">
+              <% if user_signed_in? %>
+                <%= current_user.name %>
+                <%= link_to "マイページ", user_path(current_user.id) %>
+                <%= link_to "設定", setting_path %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+                <%= link_to "退会", unsubscribe_path %>
+              <% else %>
+                <h5>ようこそ</h5>
+                <%= link_to "新規登録", new_user_registration_path %>
+                <%= link_to "ログイン", new_user_session_path %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class = "col-md-5">
           <% if user_signed_in? %>
-            <%= current_user.name %>
-            <%= link_to "マイページ", user_path(current_user.id) %>
-            <%= link_to "設定", setting_path %>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
-            <%= link_to "退会", unsubscribe_users_path(current_user) %>
+            <%= link_to posts_path do %>
+              <%= image_tag "/assets/logo2.jpg", size: '200x60' %>
+            <% end %>
           <% else %>
-            <h5>ようこそ</h5>
-            <%= link_to "新規登録", new_user_registration_path %>
-            <%= link_to "ログイン", new_user_session_path %>
+            <%= link_to root_path do %>
+              <%= image_tag "/assets/logo2.jpg", size: '200x60' %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class = "col-md-2">
+          <%= link_to new_post_path do %>
+            <h1>✉️</h1>
           <% end %>
         </div>
       </div>
-      <%= link_to 'logo', posts_path %>
     </header><!-- /header -->
     <%= yield %>
-    <footer style = "height:50px;background-color:black;">
-      
+    <footer class = "fixed-bottom" style = "height:60px;background-color:#afeebd;border:1px solid palegreen;">
+      <div class = "offset-md-5">
+        <% if current_page?(posts_path) %>
+          <%= form_tag(searches_path, method: :get) do %>
+            <%= text_field_tag(:word) %>
+            <%= submit_tag '検索' %>
+          <% end %>
+        <% end %>
+      </div>
     </footer>
   </body>
 </html>

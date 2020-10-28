@@ -1,44 +1,74 @@
-<%= form_for(@post) do |f| %>
- 	<%= render "users/shared/error_messages", resource: @post %>
-
-    <div class="field">
-      <%= f.label :title %><br />
-      <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+<div class = "container">
+  <div class = "row mt-5">
+    <div class = "offset-md-1">
+      <div class = "row">
+        <div class = "col-md-6">
+          <h1 class = "text-success">新規投稿画面</h1>
+        </div>
+        <div class = "col-md-6">
+          <ul class="nav nav-tabs">
+            <li class="nav-item w-100 text-center">
+              <a href="#normal" class="nav-link text-success" data-toggle="tab">ノーマル投稿</a>
+            </li>
+            <li class="nav-item w-100 text-center">
+              <a href="#special" class="nav-link text-success" data-toggle="tab">スペシャル投稿</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class = "row mt-5">
+    <div class = "offset-md-2">
+      <div class="tab-content">
+        <div id="normal" class="tab-pane active">
+          <%= form_for(@post) do |f| %>
+            <%= render "users/shared/error_messages", resource: @post %>
+            <div class="field mb-3">
+              <%= f.label :タイトル, class: 'text-success' %><br />
+              <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+            </div>
 
-  	<div class="field">
-    	<%= f.label :body %><br />
-    	<%= f.text_area :body, autofocus: true, autocomplete: "body" %>
-  	</div>
+            <div class="field mb-3">
+              <%= f.label :本文, class: 'text-success' %><br />
+              <%= f.text_area :body, autofocus: true, autocomplete: "body", :size => '50x8' %>
+            </div>
 
-    <div class="field">
-      <%= f.label :value %><br />
-      0
+            <div class="field mb-3">
+              <%= f.label :価値, class: 'text-success' %><br />
+              0円
+            </div>
+
+            <div class="actions mb-3"><br />
+              <%= f.submit "normal投稿", name: 'normal' %>
+            </div>
+          <% end %>
+        </div>
+        <div id="special" class="tab-pane">
+          <%= form_for(@post) do |f| %>
+            <%= render "users/shared/error_messages", resource: @post %>
+            <div class="fiel mb-3">
+              <%= f.label :タイトル, class: 'text-success' %><br />
+              <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+            </div>
+
+            <div class="field mb-3">
+              <%= f.label :本文, class: 'text-success' %><br />
+              <%= f.text_area :body, autofocus: true, autocomplete: "body", :size => '50x8' %>
+            </div>
+
+            <div class="field mb-3">
+              <%= f.label :価値, class: 'text-success' %><br />
+              <%= f.number_field :value, autofocus: true, autocomplete: "value" %>
+              円
+            </div>
+
+            <div class="actions mb-3"><br />
+              <%= f.submit "special投稿", name: 'special' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-
-  	<div class="actions">
-    	<%= f.submit "normal投稿", name: 'normal' %>
-  	</div>
-<% end %>
-<%= form_for(@post) do |f| %>
-  <%= render "users/shared/error_messages", resource: @post %>
-
-    <div class="field">
-      <%= f.label :title %><br />
-      <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :body %><br />
-      <%= f.text_area :body, autofocus: true, autocomplete: "body" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :value %><br />
-      <%= f.number_field :value, autofocus: true, autocomplete: "value" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "special投稿", name: 'special' %>
-    </div>
-<% end %>
+  </div>
+</div>

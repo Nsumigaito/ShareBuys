@@ -1,28 +1,40 @@
-<%= link_to '⬅︎', :back %>
+<div class = "container">
+  <div class = "row mt-5">
+    <div class = "offset-md-1">
+      <h1 class = "text-success">プロフィール変更画面</h1>
+    </div>
+  </div>
+  <div class = "row mt-5">
+    <div class = "offset-md-2">
+      <%= form_for(@user , url: profile_update_path, method: :patch) do |f| %>
+        <%= render "users/shared/error_messages", resource: @user %>
 
-<%= form_for(@user , url: profile_update_path, method: :patch) do |f| %>
- 	<%= render "users/shared/error_messages", resource: @user %>
+          <div class="field mb-3">
+            <%= f.label :名前, class: 'text-success' %><br />
+            <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+          </div>
 
-  	<div class="field">
-    	<%= f.label :name %><br />
-    	<%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  	</div>
+          <div class="field mb-3">
+            <%= f.label :自己紹介文, class: 'text-success' %><br />
+            <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction" %>
+          </div>
 
-  	<div class="field">
-    	<%= f.label :introduction %><br />
-    	<%= f.text_area :introduction, autofocus: true, autocomplete: "introduction" %>
-  	</div>
+          <div class = "field mb-3">
+            <%= f.label :プロフィール画像, class: 'text-success' %><br />
+            <% if @user.image? %>
+              <%= image_tag @user.image.url, :size => '100x100' %>
+            <% else %>
+              <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
+            <% end %>
+            <button type="button" class="btn btn-outline-success rounded-pill">
+              <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+            </button>
+          </div>
 
-  	<% if @user.image? %>
-  		<%= image_tag @user.image.url, :size => '100x100' %>
-	<% else %>
-  		<%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
-	<% end %>
-  	<button type="button" class="btn btn-outline-secondary rounded-pill">
-    	<%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
-  	</button>
-
-  	<div class="actions">
-    	<%= f.submit "Update" %>
-  	</div>
-<% end %>
+          <div class="actions mb-3"><br />
+            <%= f.submit "Update", class: 'btn btn-outline-success' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

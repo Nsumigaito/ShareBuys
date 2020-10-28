@@ -1,12 +1,61 @@
-<% @orders.each do |order| %>
-<% if order.image? %>
-  <%= image_tag order.image, :size => '100x100' %>
-<% else %>
-  <%= image_tag "/assets/no_image.jpg", :size => '100x100' %>
-<% end %>
-<%= order.name %>
-<%= order.value %>
-<%= order.title %>
-コメント数：<%= order.comment_count %>
-<%= order.favorite_count %>
-<% end %>
+<div class = "container">
+  <div class = "row mt-5">
+  	<div class = "offset-md-1">
+  	  <h1 class = "text-success">残高</h1>
+  	</div>
+  </div>
+  <div class = "row mt-5" style = "background-color:#cbffd3">
+  	<div class = "mx-auto">
+	  <h3><%= @user.point %>¥</h3>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "offset-md-1">
+  	  <h1 class = "text-success">購入履歴</h1>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "col-md-12">
+	  <% @orders.each do |order| %>
+	    <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
+	      <%= link_to user_path(order.user_number), class: 'w-100' do %>
+	        <div class = "row">
+              <div class = "col-md-2">
+			    <% if order.image? %>
+			      <%= image_tag order.image, :size => '50x50' %>
+			    <% else %>
+			      <%= image_tag "/assets/no_image.jpg", :size => '50x50' %>
+			    <% end %>
+			  </div>
+			  <div class = "col-md-5">
+	    		<%= order.name %>
+			  </div>
+			  <div class = "col-md-5">
+				<%= order.value %>
+			  </div>
+			</div>
+		  <% end %>
+		  <%= link_to post_path(order.post_number) do %>
+		    <div class = "row">
+              <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen; border-bottom:1px solid limegreen;">
+                <div class = "col-md-12 mb-3">
+				  <%= order.title %>
+                </div>
+              </div>
+            </div>
+		  <% end %>
+		  <div class = "offset-md-1 col-md-10">
+	        <div class = "row">
+	          <div class = "col-md-2">
+	            返信数：<%= order.comment_count %>
+	          </div>
+	          <div class = "offset-md-8">
+                いいね数：<%= order.favorite_count %>
+	          </div>
+	        </div>
+	      </div>
+  	    </div>
+  	  <% end %>
+    </div>
+  </div>
+</div>

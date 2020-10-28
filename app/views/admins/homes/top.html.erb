@@ -1,2 +1,18 @@
-管理者topページです。
-<%= link_to '報告ページ', admins_posts_path %>
+<div class = "container">
+  <div class = "row mt-5">
+  	<div class = "offset-md-1">
+  	  <h1 class = "text-success">管理者topページです</h1>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "offset-md-2">
+  		
+	<%= link_to admins_posts_path do %>
+	  <h3 class = "btn btn-outline-primary mr-5">投稿報告一覧</h3>
+	<% end %>
+	<%= link_to admins_post_comments_path do %>
+	  <h3 class = "btn btn-outline-primary">返信コメント報告一覧</h3>
+	<% end %>
+  	</div>
+  </div>
+</div>

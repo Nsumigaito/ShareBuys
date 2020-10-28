@@ -1,2 +1,16 @@
-<%= link_to 'プロフィール変更', profile_edit_path %>
-<%= link_to 'メールアドレス・電話番号変更', edit_user_registration_path(current_user) %>
+<div class = "container">
+  <div class = "row mt-5">
+  	<div class = "mx-auto mt-5">
+	  <%= link_to profile_edit_path do %>
+	  	<h2 class="btn btn-outline-success rounded-pill">プロフィールの変更</h2>
+	  <% end %>
+  	</div>
+  </div>
+  <div class = "row mt-5">
+  	<div class = "mx-auto mt-5">
+	  <%= link_to edit_user_registration_path(current_user) do %>
+	  	<h2 class="btn btn-outline-success rounded-pill">メールアドレス・電話番号の変更</h2>
+	  <% end %>
+  	</div>
+  </div>
+</div>

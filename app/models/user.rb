@@ -9,7 +9,6 @@ class User < ApplicationRecord
   validates :introduction, length: {maximum: 100}
   validates :telephone, presence: true, format: {with: /\A\d{10}$|^\d{11}\z/, message: '10桁か11桁の電話番号を入力してください。'}
 
-  has_many :purchase, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :posts, dependent: :destroy

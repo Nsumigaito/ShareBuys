@@ -1,4 +1,5 @@
 class Users::PostsController < ApplicationController
+  	before_action :authenticate_user!
 
 	def new
 		@post = Post.new
@@ -9,9 +10,11 @@ class Users::PostsController < ApplicationController
 	end
 
 	def create
-		@user = User.find(current_user.id)
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
+		@user = current_user
+		@add_point = @user.point + 100
+		@user.update(point: @add_point)
 		if params[:normal]
 			@post.value = 0
 		end
@@ -23,8 +26,9 @@ class Users::PostsController < ApplicationController
 	end
 
 	def index
-		@posts = Post.all
 		@user = current_user
+	    @users = @user.followings.all
+	    @posts = Post.where(user_id: @users).or(Post.where(user_id: @current_user)).order("created_at DESC")
 	end
 
 	def show
@@ -41,7 +45,7 @@ class Users::PostsController < ApplicationController
 	def report
 		@post = Post.find(params[:id])
 		@post.update(is_report: true)
-		redirect_to posts_path
+		redirect_to request.referrer
 	end
 
 	private
