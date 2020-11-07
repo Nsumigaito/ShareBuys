@@ -1,0 +1,30 @@
+<% post_comments.each do |post_comment| %>
+  <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
+    <div class = "row">
+      <div class = "col-md-2">
+        <% if post_comment.user.image? %>
+          <%= image_tag asset_path(post_comment.user.image.url), :size => '50x50' %>
+        <% else %>
+          <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
+        <% end %>
+      </div>
+      <div class = "col-md-5">
+        <%= post_comment.user.name %>
+      </div>
+    </div>
+    <%= link_to post_path(post_comment.post) do %>
+      <div class = "row">
+        <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen;">
+          <div class = "col-md-12 mb-3">
+            <%= post_comment.comment %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class = "row">
+      <div class = "offset-md-11">
+        <%= render 'shared/dropdown_comments_index', post_comment: post_comment %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,5 @@
+<% if (current_user == post.user) || (current_user.orders.exists?(post_number: post.id)) %>
+  <%= render 'template/poss_special_posts_index', post: post %>
+<% else %>
+  <%= render 'template/before_poss_special_posts_index', post: post %>
+<% end %>
