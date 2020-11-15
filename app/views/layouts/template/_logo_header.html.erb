@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <%= link_to posts_path do %>
+    <%= image_tag asset_path('logo3.jpg'), size: '200x60' %>
+  <% end %>
+<% else %>
+   <%= link_to root_path do %>
+    <%= image_tag asset_path('logo3.jpg'), size: '200x60' %>
+  <% end %>
+<% end %>

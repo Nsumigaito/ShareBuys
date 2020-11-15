@@ -6,7 +6,7 @@
   </div>
   <div class = "row mt-5" style = "background-color:#cbffd3">
   	<div class = "mx-auto">
-	  <h3><%= @user.point %>¥</h3>
+	  	<h3><%= @user.point %>¥</h3>
   	</div>
   </div>
   <div class = "row mt-5">
@@ -16,46 +16,7 @@
   </div>
   <div class = "row mt-5">
   	<div class = "col-md-12">
-	  <% @orders.each do |order| %>
-	    <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
-	      <%= link_to user_path(order.user_number), class: 'w-100' do %>
-	        <div class = "row">
-              <div class = "col-md-2">
-			    <% if order.image? %>
-			      <%= image_tag asset_path(order.image), :size => '50x50' %>
-			    <% else %>
-			      <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
-			    <% end %>
-			  </div>
-			  <div class = "col-md-5">
-	    		<%= order.name %>
-			  </div>
-			  <div class = "col-md-5">
-				<%= order.value %>
-			  </div>
-			</div>
-		  <% end %>
-		  <%= link_to post_path(order.post_number) do %>
-		    <div class = "row">
-              <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen; border-bottom:1px solid limegreen;">
-                <div class = "col-md-12 mb-3">
-				  <%= order.title %>
-                </div>
-              </div>
-            </div>
-		  <% end %>
-		  <div class = "offset-md-1 col-md-10">
-	        <div class = "row">
-	          <div class = "col-md-2">
-	            返信数：<%= order.comment_count %>
-	          </div>
-	          <div class = "offset-md-8">
-                いいね数：<%= order.favorite_count %>
-	          </div>
-	        </div>
-	      </div>
-  	    </div>
-  	  <% end %>
+	  	<%= render 'template/orders_index', orders: @orders %>
     </div>
   </div>
 </div>

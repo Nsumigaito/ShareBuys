@@ -1,0 +1,10 @@
+<% users.each do |user| %>
+        <%= link_to user_path(user) do %>
+          <% if user.image? %>
+            <%= image_tag asset_path(user.image.url), :size => '100x100' %>
+          <% else %>
+            <%= image_tag asset_path('no_image.jpg'), :size => '100x100' %>
+          <% end %>
+          <%= user.name %>
+        <% end %>
+      <% end %>

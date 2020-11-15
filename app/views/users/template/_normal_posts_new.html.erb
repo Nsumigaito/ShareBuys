@@ -1,0 +1,23 @@
+<div id="normal" class="tab-pane active">
+          <%= form_for(post) do |f| %>
+            <%= render "users/shared/error_messages", resource: post %>
+            <div class="field mb-3">
+              <%= f.label :タイトル, class: 'text-success' %><br />
+              <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+            </div>
+
+            <div class="field mb-3">
+              <%= f.label :本文, class: 'text-success' %><br />
+              <%= f.text_area :body, autofocus: true, autocomplete: "body", :size => '50x8' %>
+            </div>
+
+            <div class="field mb-3">
+              <%= f.label :価値, class: 'text-success' %><br />
+              0円
+            </div>
+
+            <div class="actions mb-3"><br />
+              <%= f.submit "normal投稿", name: 'normal' %>
+            </div>
+          <% end %>
+        </div>
