@@ -2,7 +2,7 @@
   <div class = "row mt-5">
     <div class = "col-md-12">
       <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
-        <%= render 'template/posts_show', post: @post %>
+        <%= render 'users/template/posts_show', post: @post %>
       </div>
     </div>
   </div>
@@ -16,7 +16,7 @@
   </div>
   <div class = "row mt-5">
     <div class = "col-md-12">
-      <%= render 'template/comment_posts_show', post: @post %>
+      <%= render 'users/template/comment_posts_show', post: @post %>
     </div>
   </div>
 </div>

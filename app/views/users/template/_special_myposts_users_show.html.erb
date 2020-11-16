@@ -1,5 +1,0 @@
-<% if (current_user == post.user) || (current_user.orders.exists?(post_number: post.id)) %>
-                  <%= render 'template/poss_special_myposts_users_show', post: post %>
-                <% else %>
-                  <%= render 'template/before_poss_myposts_users_show', post: post %>
-                <% end %>

@@ -1,13 +1,13 @@
 <% favorite_posts.each do |favorite_post| %>
             <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
               <% if favorite_post.post.value == 0 %>
-                <%= render 'normal_myfavorites_users_show', favorite_post: favorite_post %>
+                <%= render 'users/normal_myfavorites_users_show', favorite_post: favorite_post %>
               <% else %>
-                <%= render 'special_myfavorites_users_show', favorite_post: favorite_post %>
+                <%= render 'users/special_myfavorites_users_show', favorite_post: favorite_post %>
               <% end %>
               <div class = "row">
                 <div class = "offset-md-11">
-                  <%= render 'dropdown_myfavorites_users_show', favorite_post: favorite_post %>
+                  <%= render 'users/dropdown_myfavorites_users_show', favorite_post: favorite_post %>
                 </div>
               </div>
             </div>

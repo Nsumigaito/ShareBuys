@@ -1,6 +1,6 @@
 <div class = "container">
   <div class = "row">
-    <%= render 'template/myprofile_users_show', user: @user %>
+    <%= render 'users/template/myprofile_users_show', user: @user %>
   </div>
   <div class = "row mb-5">
     <ul class="nav nav-tabs">
@@ -19,17 +19,17 @@
     <div class="tab-content w-100">
       <div id="posts" class="tab-pane active w-100">
         <div class = "col-md-12">
-          <%= render 'template/myposts_users_show', posts: @posts %>
+          <%= render 'users/template/myposts_users_show', posts: @posts %>
         </div>
       </div>
       <div id="comments" class="tab-pane w-100">
         <div class = "col-md-12">
-          <%= render 'template/mycomments_users_show', post_comments: @post_comments %>
+          <%= render 'users/template/mycomments_users_show', post_comments: @post_comments %>
         </div>
       </div>
       <div id="favorites" class="tab-pane w-100">
         <div class = "col-md-12">
-          <%= render 'template/myfavorites_users_show', favorite_posts: @favorite_posts %>
+          <%= render 'users/template/myfavorites_users_show', favorite_posts: @favorite_posts %>
         </div>
       </div>
     </div>

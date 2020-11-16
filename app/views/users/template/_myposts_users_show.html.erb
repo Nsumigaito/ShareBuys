@@ -1,13 +1,13 @@
 <% posts.each do |post| %>
             <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
               <% if post.value == 0 %>
-                <%= render 'template/normal_myposts_users_show', post: post %>
+                <%= render 'users/shared/normal', post: post %>
               <% else %>
-                <%= render 'template/special_myposts_users_show', post: post %>
+                <%= render 'users/shared/special', post: post %>
               <% end %>
               <div class = "row">
                 <div class = "offset-md-11">
-                  <%= render 'template/dropdown_myposts_users_show', post: post %>
+                  <%= render 'users/shared/dropdown', post: post %>
                 </div>
               </div>
             </div>
