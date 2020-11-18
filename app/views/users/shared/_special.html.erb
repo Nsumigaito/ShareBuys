@@ -1,0 +1,5 @@
+<% if (current_user == post.user) || (current_user.orders.exists?(post_number: post.id)) %>
+  <%= render 'users/shared/poss_special', post: post %>
+<% else %>
+  <%= render 'users/shared/before_poss_special', post: post %>
+<% end %>

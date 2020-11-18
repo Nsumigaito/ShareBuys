@@ -6,23 +6,22 @@
   </div>
   <div class = "row mt-5">
   	<div class = "col-md-12">
-  	  <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
-  	  	<div class = "row">
+  	  <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;"><div class = "row">
           <div class = "col-md-2">
-			<% if @post.user.image? %>
-		  	  <%= image_tag asset_path(@post.user.image.url), :size => '50x50' %>
-			<% else %>
-	 	 	  <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
-			<% end %>
-		  </div>
-		  <div class = "col-md-5">
-			<%= @post.user.name %>
-		  </div>
-		  <div class = "col-md-5">
-			<%= @post.value %>
-		  </div>
-		</div>
-		<div class = "row">
+            <% if @post.user.image? %>
+              <%= image_tag asset_path(@post.user.image.url), :size => '50x50' %>
+            <% else %>
+              <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
+            <% end %>
+          </div>
+          <div class = "col-md-5">
+            <%= @post.user.name %>
+          </div>
+          <div class = "col-md-5">
+            <%= @post.value %>
+          </div>
+        </div>
+        <div class = "row">
           <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen; border-bottom:1px solid limegreen;">
             <div class = "col-md-12 mb-3">
               <%= @post.title %>
@@ -54,26 +53,25 @@
   </div>
   <div class = "row mt-5">
   	<div class = "offset-md-2">
-	  <% if @user.point == nil %>
-	    <% @user.point = 0 %>
-	  <% end %>
-
-	  <% if @user.point - @post.value < 0 %>
-		ポイントが足りません
-	  <% else %>
-  	    <h3>支払い後のポイント：<%= @user.point - @post.value %></h3>
-  	    <%= form_for @order do |f| %>
-		<%= f.hidden_field :user_number, value: @post.user_id %>
-		<%= f.hidden_field :post_number, value: @post.id %>
-		<%= f.hidden_field :name, value: @post.user.name %>
-		<%= f.hidden_field :image, value: @post.user.image %>
-		<%= f.hidden_field :title, value: @post.title %>
-		<%= f.hidden_field :value, value: @post.value %>
-		<%= f.hidden_field :comment_count, value: @post.post_comments.count %>
-		<%= f.hidden_field :favorite_count, value: @post.favorites.count %><br>
-		<%= f.submit '購入', class: 'btn btn-outline-success' %>
-		<% end %>
-	  <% end %>
+      <% if @user.point == nil %>
+        <% @user.point = 0 %>
+      <% end %>
+      <% if @user.point - @post.value < 0 %>
+        ポイントが足りません
+      <% else %>
+        <h3>支払い後のポイント：<%= @user.point - @post.value %></h3>
+        <%= form_for @order do |f| %>
+          <%= f.hidden_field :user_number, value: @post.user_id %>
+          <%= f.hidden_field :post_number, value: @post.id %>
+          <%= f.hidden_field :name, value: @post.user.name %>
+          <%= f.hidden_field :image, value: @post.user.image %>
+          <%= f.hidden_field :title, value: @post.title %>
+          <%= f.hidden_field :value, value: @post.value %>
+          <%= f.hidden_field :comment_count, value: @post.post_comments.count %>
+          <%= f.hidden_field :favorite_count, value: @post.favorites.count %><br>
+          <%= f.submit '購入', class: 'btn btn-outline-success' %>
+        <% end %>
+      <% end %>
   	</div>
   </div>
 </div>
