@@ -39,9 +39,7 @@
 <div class = "row">
   <div class = "offset-md-11">
     <div class="dropdown">
-      <!-- 切替ボタンの設定 -->
       <button type="button" class="btn btn-success dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-      <!-- ドロップメニューの設定 -->
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
         <%= link_to "報告取消", admins_cancel_report_path(post.id), method: :patch, "data-confirm" => "報告を取り消しますか？" %>

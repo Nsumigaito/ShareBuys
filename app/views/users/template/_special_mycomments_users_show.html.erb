@@ -1,5 +1,5 @@
 <% if (current_user == post_comment.post.user) || (current_user.orders.exists?(post_number: post_comment.post.id)) %>
-                  <%= render 'users/template/poss_special_mycomments_users_show', post_comment: post_comment %>
-                <% else %>
-                  <%= render 'users/template/before_poss_special_mycomments_users_show', post_comment: post_comment %>
-                <% end %>
+  <%= render 'users/template/poss_special_mycomments_users_show', post_comment: post_comment %>
+<% else %>
+  <%= render 'users/template/before_poss_special_mycomments_users_show', post_comment: post_comment %>
+<% end %>

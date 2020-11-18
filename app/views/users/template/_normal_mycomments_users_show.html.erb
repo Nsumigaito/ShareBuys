@@ -1,21 +1,21 @@
 <div class = "row">
-                  <div class = "col-md-2">
-                    <% if post_comment.post.user.image? %>
-                      <%= image_tag asset_path(post_comment.post.user.image.url), :size => '50x50' %>
-                    <% else %>
-                      <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
-                    <% end %>
-                  </div>
-                  <div class = "col-md-5">
-                    <%= post_comment.post.user.name %>
-                  </div>
-                </div>
-                <%= link_to post_path(post_comment.post.id) do %>
-                  <div class = "row">
-                    <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen; border-bottom:1px solid limegreen;">
-                      <div class = "col-md-12 mb-3">
-                        <%= post_comment.comment %>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
+  <div class = "col-md-2">
+    <% if post_comment.post.user.image? %>
+      <%= image_tag asset_path(post_comment.post.user.image.url), :size => '50x50' %>
+    <% else %>
+      <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
+    <% end %>
+  </div>
+  <div class = "col-md-5">
+    <%= post_comment.post.user.name %>
+  </div>
+</div>
+<%= link_to post_path(post_comment.post.id) do %>
+  <div class = "row">
+    <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen; border-bottom:1px solid limegreen;">
+      <div class = "col-md-12 mb-3">
+        <%= post_comment.comment %>
+      </div>
+    </div>
+  </div>
+<% end %>

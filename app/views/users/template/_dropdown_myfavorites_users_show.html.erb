@@ -1,13 +1,11 @@
 <div class="dropdown">
-                    <!-- 切替ボタンの設定 -->
-                    <button type="button" class="btn btn-success dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <!-- ドロップメニューの設定 -->
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <% if current_user.id == favorite_post.post.user.id %>
-                        <%= link_to "削除", post_path(favorite_post.post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
-                        <%= link_to "報告", report_path(favorite_post.post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
-                      <% else %>
-                        <%= link_to "報告", report_path(favorite_post.post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
-                      <% end %>
-                    </div>
-                  </div>
+  <button type="button" class="btn btn-success dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <% if current_user.id == favorite_post.post.user.id %>
+      <%= link_to "削除", post_path(favorite_post.post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
+      <%= link_to "報告", report_path(favorite_post.post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+    <% else %>
+      <%= link_to "報告", report_path(favorite_post.post.id), method: :patch, "data-confirm" => "本当に報告しますか？" %>
+    <% end %>
+  </div>
+</div>

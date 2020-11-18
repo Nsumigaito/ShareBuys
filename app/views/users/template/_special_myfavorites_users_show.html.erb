@@ -1,5 +1,5 @@
 <% if (current_user == favorite_post.post.user) || (current_user.orders.exists?(post_number: favorite_post.post.id)) %>
-                  <%= render 'users/poss_special_myfavorites_users_show', favorite_post: favorite_post %>
-                <% else %>
-                  <%= render 'users/before_poss_special_myfavorites_users_show', favorite_post: favorite_post %>
-                <% end %>
+  <%= render 'users/poss_special_myfavorites_users_show', favorite_post: favorite_post %>
+<% else %>
+  <%= render 'users/before_poss_special_myfavorites_users_show', favorite_post: favorite_post %>
+<% end %>

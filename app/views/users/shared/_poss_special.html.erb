@@ -1,46 +1,46 @@
 <%= link_to user_path(post.user), class: 'w-100' do %>
-                    <div class = "row">
-                      <div class = "col-md-2">
-                        <% if post.user.image? %>
-                          <%= image_tag asset_path(post.user.image.url), :size => '50x50' %>
-                        <% else %>
-                          <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
-                        <% end %>
-                      </div>
-                      <div class = "col-md-5">
-                        <%= post.user.name %>
-                      </div>
-                      <div class = "col-md-5">
-                        価値：<%= post.value %>
-                      </div>
-                    </div>
-                  <% end %>
-                  <%= link_to post_path(post.id) do %>
-                    <div class = "row">
-                      <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen; border-bottom:1px solid limegreen;">
-                        <div class = "col-md-12 mb-3">
-                          <%= post.title %>
-                        </div>
-                      </div>
-                    </div>
-                    <div class = "offset-md-1 col-md-10">
-                      <div class = "row">
-                        <div class = "col-md-12">
-                          返信数：<%= post.post_comments.count %>
-                        </div>
-                        <div class = "offset-md-8">
-                          <% if post.favorited_by?(current_user) %>
-                            <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
-                              <span aria-hidden="true"></span>
-                              いいね数：<%= post.favorites.count %>
-                            <% end %>
-                          <% else %>
-                            <%= link_to post_favorites_path(post), method: :post, remote: true do %>
-                              <span aria-hidden="true"></span>
-                              いいね数：<%= post.favorites.count %>
-                            <% end %>
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  <% end %>
+  <div class = "row">
+    <div class = "col-md-2">
+      <% if post.user.image? %>
+        <%= image_tag asset_path(post.user.image.url), :size => '50x50' %>
+      <% else %>
+        <%= image_tag asset_path('no_image.jpg'), :size => '50x50' %>
+      <% end %>
+    </div>
+    <div class = "col-md-5">
+      <%= post.user.name %>
+    </div>
+    <div class = "col-md-5">
+      価値：<%= post.value %>
+    </div>
+  </div>
+<% end %>
+<%= link_to post_path(post.id) do %>
+  <div class = "row">
+    <div class = "offset-md-1 col-md-10" style = "border-top:1px solid limegreen; border-bottom:1px solid limegreen;">
+      <div class = "col-md-12 mb-3">
+        <%= post.title %>
+      </div>
+    </div>
+  </div>
+  <div class = "offset-md-1 col-md-10">
+    <div class = "row">
+      <div class = "col-md-12">
+        返信数：<%= post.post_comments.count %>
+      </div>
+      <div class = "offset-md-8">
+        <% if post.favorited_by?(current_user) %>
+          <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
+            <span aria-hidden="true"></span>
+            いいね数：<%= post.favorites.count %>
+          <% end %>
+        <% else %>
+          <%= link_to post_favorites_path(post), method: :post, remote: true do %>
+            <span aria-hidden="true"></span>
+            いいね数：<%= post.favorites.count %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

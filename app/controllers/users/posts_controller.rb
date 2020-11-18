@@ -1,5 +1,5 @@
 class Users::PostsController < ApplicationController
-  	before_action :authenticate_user!
+	before_action :authenticate_user!
 
 	def new
 		@post = Post.new
@@ -27,8 +27,8 @@ class Users::PostsController < ApplicationController
 
 	def index
 		@user = current_user
-	    @users = @user.followings.all
-	    @posts = Post.where(user_id: @users).or(Post.where(user_id: @current_user)).order("created_at DESC")
+    @users = @user.followings.all
+    @posts = Post.where(user_id: @users).or(Post.where(user_id: @current_user)).order("created_at DESC")
 	end
 
 	def show
