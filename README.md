@@ -23,7 +23,7 @@
 https://docs.google.com/spreadsheets/d/1v0hI69LY2PtBw4aRjhf37fyJOmnLIq-aRfXaiwE4olg/edit?usp=sharing
 
 ## 開発環境
-- OS：macOS Catalina -v 10.15.6
+- OS：macOS Big Sur -v 11.0.1
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
