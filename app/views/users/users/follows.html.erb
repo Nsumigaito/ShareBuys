@@ -1,8 +1,8 @@
 <div class = "container">
   <div class = "row">
   	<div class = "offset-md-3">
-	  <% @users.each do |user| %>
-	    <div class = "row mb-3">
+  	  <% @users.each do |user| %>
+  	    <div class = "row mb-3">
           <%= link_to user_path(user.id) do %>
             <% if user.image? %>
               <%= image_tag asset_path(user.image.url), :size => '100x100' %>
@@ -11,7 +11,7 @@
             <% end %>
             <%= user.name %>
           <% end %>
-	    </div>
+  	    </div>
       <% end %>
   	</div>
   </div>

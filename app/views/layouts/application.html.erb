@@ -16,48 +16,23 @@
     <header class = "sticky-top" style = "height:60px;background-color:#afeebd;border:1px solid palegreen;">
       <div class = "row">
         <div class = "col-md-5">
-          <div class="dropdown">
-            <!-- 切替ボタンの設定 -->
-            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              ドロップダウンボタン
-            </button>
-            <!-- ドロップメニューの設定 -->
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style = "width:350px;">
-              <% if user_signed_in? %>
-                <%= current_user.name %>
-                <%= link_to "マイページ", user_path(current_user.id) %>
-                <%= link_to "設定", setting_path %>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
-                <%= link_to "退会", unsubscribe_path %>
-              <% else %>
-                <h5>ようこそ</h5>
-                <%= link_to "新規登録", new_user_registration_path %>
-                <%= link_to "ログイン", new_user_session_path %>
-              <% end %>
-            </div>
-          </div>
+          <%= render 'layouts/template/dropdown_header' %>
         </div>
         <div class = "col-md-5">
-          <% if user_signed_in? %>
-            <%= link_to posts_path do %>
-              <%= image_tag asset_path('logo2.jpg'), size: '200x60' %>
-            <% end %>
-          <% else %>
-            <%= link_to root_path do %>
-              <%= image_tag asset_path('logo2.jpg'), size: '200x60' %>
-            <% end %>
-          <% end %>
+          <%= render 'layouts/template/logo_header' %>
         </div>
         <div class = "col-md-2">
           <% if user_signed_in? %>
             <%= link_to new_post_path do %>
-              <h1>✉️</h1>
+              <h1>投稿</h1>
             <% end %>
           <% end %>
         </div>
       </div>
-    </header><!-- /header -->
+    </header>
+
     <%= yield %>
+
     <footer class = "fixed-bottom" style = "height:60px;background-color:#afeebd;border:1px solid palegreen;">
       <div class = "offset-md-5">
         <% if current_page?(posts_path) %>

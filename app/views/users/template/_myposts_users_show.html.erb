@@ -1,0 +1,14 @@
+<% posts.each do |post| %>
+  <div class = "posts w-100 mb-1" style ="background-color:#cbffd3;border:1px solid limegreen;">
+    <% if post.value == 0 %>
+      <%= render 'users/shared/normal', post: post %>
+    <% else %>
+      <%= render 'users/shared/special', post: post %>
+    <% end %>
+    <div class = "row">
+      <div class = "offset-md-11">
+        <%= render 'users/shared/dropdown', post: post %>
+      </div>
+    </div>
+  </div>
+<% end %>
