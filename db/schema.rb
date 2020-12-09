@@ -21,17 +21,6 @@ ActiveRecord::Schema.define(version: 2020_10_12_021056) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.integer "visiter_id"
-    t.integer "visited_id"
-    t.integer "item_id"
-    t.integer "comment_id"
-    t.string "action"
-    t.boolean "checked", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
