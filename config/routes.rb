@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   	# root
   	root 'homes#top'
 
+    # about
+    get '/admins/about' => 'homes#about', as: 'about_admin'
+
   	# posts
   	resources :posts, only: [:index, :show]
 
@@ -23,6 +26,9 @@ Rails.application.routes.draw do
 
   	# root
   	root 'homes#top'
+
+    # about
+    get '/users/about' => 'homes#about', as: 'about'
 
   	# devise
   	devise_for :users
