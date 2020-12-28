@@ -3,16 +3,18 @@
     ドロップダウンボタン
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style = "width:350px;">
-    <% if user_signed_in? %>
-      <%= current_user.name %>
-      <%= link_to "マイページ", user_path(current_user.id) %>
-      <%= link_to "設定", setting_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
-      <%= link_to "退会", unsubscribe_path %>
+    <% if user_signed_in? %> |
+      <%= current_user.name %> |
+      <%= link_to "マイページ", user_path(current_user.id) %> |
+      <%= link_to "How to", about_path %> |
+      <%= link_to "設定", setting_path %> |
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %> |
+      <%= link_to "退会", unsubscribe_path %> |
     <% else %>
-      <h5>ようこそ</h5>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
+      <h5>ようこそ</h5> |
+      <%= link_to "新規登録", new_user_registration_path %> |
+      <%= link_to "ログイン", new_user_session_path %> |
+      <%= link_to "How to", about_path %> |
     <% end %>
   </div>
 </div>
